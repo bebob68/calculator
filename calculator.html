@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="major.css">
+    <title></title>
+  </head>
+  <body>
+    <div class="cal">
+        <p id="disp"></p>
+      <div class="buttons">
+           <button type="button" onclick="numpad(0)" id="num">0</button>
+           <button type="button" onclick="numpad(1)" id="num">1</button>
+           <button type="button" onclick="numpad(2)" id="num">2</button>
+           <button type="button" onclick="numpad(3)" id="num">3</button>
+           <button type="button" onclick="numpad(4)" id="num">4</button>
+           <button type="button" onclick="numpad(5)" id="num">5</button>
+           <button type="button" onclick="numpad(6)" id="num">6</button>
+           <button type="button" onclick="numpad(7)" id="num">7</button>
+           <button type="button" onclick="numpad(8)" id="num">8</button>
+           <button type="button" onclick="numpad(9)" id="num">9</button>
+
+<div class="foot">
+
+
+        <button type="button" onclick="numpad('+')" class="operate">+</button>
+        <button type="button" onclick="numpad('-')" class="operate">-</button>
+        <button type="button" onclick="numpad('X')" class="operate">x</button>
+        <button type="button" onclick="numpad('/')" class="operate">/</button>
+        <button type="button" onclick="equals()" class="operate">=</button>
+        <button type="button" onclick="numpad('.')" class="operate" id="point">.</button>
+        <button type="button" onclick="clr()" class="operate">Clear</button>
+        <button type="button" onclick="und()" class="operate"><=</button>
+        </div>
+    </div>
+  </div>
+    <script>
+    // this function is called for Clear
+     function clr(){
+         document.getElementById('disp').innerHTML = '';
+     }
+    // this funtion is called for undo
+    function und(){
+      console.log('undo detected')
+      var str = document.getElementById('disp').textContent;
+      var len = str.length;
+      document.getElementById("disp").textContent=str.substring(0,len-1);
+    }
+    //fuction for sum
+      function ad(a,b){
+        return a + b;
+      }
+
+   // function for subtract
+      function subtract(a,b){
+      let sub = a-b;
+      console.log(sub);
+      return sub;
+     }
+
+  // function for multiply
+      function mul(a,b){
+      let mul = a*b;
+      console.log(mul);
+      return a*b;
+      }
+
+  // function for divide
+     function div(a,b){
+      let div= a/b;
+      console.log(div);
+      return div;
+     }
+ //this function is called if clicked on any numpad
+     function numpad(val){
+       let x = document.getElementById('disp').textContent;
+      document.getElementById('disp').innerHTML=x+val;
+      console.log(val);
+      if(val=='.'){
+        document.getElementById('point').disabled = true;}
+        else if (val==="+"||val==="-"||val==="/"||val==="X") {
+          document.getElementById('point').disabled = false;
+        }
+     }
+
+ // this function is called when equals button is clicked
+     function equals(){
+       var str = document.getElementById('disp').textContent;
+       var len = str.length;
+
+       if(str.includes('X')){
+         var x = str.search('X');
+         var y = str.slice(0,x);
+         var z= str.slice(x+1,len+1);
+         document.getElementById('disp').innerHTML="";
+         var out=mul(y,z);
+         document.getElementById('disp').innerHTML=out;
+         console.log("detected");
+       }
+
+
+       else if(str.includes('-')){
+         var x = str.search('-');
+         var y = str.slice(0,x);
+         var z= str.slice(x+1,len+1);
+         document.getElementById('disp').innerHTML="";
+         var out=subtract(y,z);
+         document.getElementById('disp').innerHTML=out;
+         console.log("detected");
+       }
+
+
+       else if(str.includes('/')){
+         var x = str.search('/');
+         var y = str.slice(0,x);
+         var z= str.slice(x+1,len+1);
+         document.getElementById('disp').innerHTML="";
+         var out=div(y,z);
+         document.getElementById('disp').innerHTML=out;
+         console.log("detected");
+       }
+
+       else {
+         var s = str.split('');
+
+         var x = s.indexOf('+');
+         console.log(x);
+         var y = str.slice(0,x);
+         var z= str.slice(x+1,len+1);
+         y= parseFloat(y,10);
+         z= parseFloat(z,10);
+         console.log(y,z);
+         document.getElementById('disp').innerHTML="";
+         var out=y+z;
+         console.log(out);
+         document.getElementById('disp').innerHTML=out;
+         console.log("detected");
+       }
+
+     }
+     </script>
+
+  </body>
+</html>
